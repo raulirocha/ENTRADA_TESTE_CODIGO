@@ -1,0 +1,362 @@
+﻿<UserControl x:Class="FluxoSistema.Entrada.Views.NovaEntradaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:FluxoSistema.Entrada.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1300">
+
+    <UserControl.Resources>
+        <Style x:Key="TotalBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1,1,0,1"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+        <Style x:Key="TotalLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Foreground" Value="#6B7280"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="TotalValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="LinkButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="SteelBlue"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Border Background="White" CornerRadius="8" BorderBrush="#D1D5DB" BorderThickness="1">
+       
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#F9FAFB" CornerRadius="8,8,0,0" BorderBrush="#D1D5DB" BorderThickness="0,0,0,1" Padding="20,15">
+                <TextBlock Text="{Binding Title, FallbackValue='Entrada NFe: 12345 (Fornecedor: ACME LTDA)'}" FontSize="18" FontWeight="SemiBold" Foreground="#111827"/>
+            </Border>
+
+            <WrapPanel Grid.Row="1" Margin="15" Orientation="Horizontal">
+
+                <GroupBox Header="DADOS DA ENTRADA" FontWeight="Bold" FontSize="11" Margin="5" Padding="5" MinWidth="260">
+                    <StackPanel>
+                        <TextBlock Text="Empresa Destino" FontSize="11" Foreground="#6B7280" FontWeight="Normal" Margin="0,5,0,0"/>
+                        <ComboBox ItemsSource="{Binding Empresas}" 
+          SelectedItem="{Binding EmpresaSelecionada}"
+          DisplayMemberPath="NomeFantasia"
+          Margin="0,2,0,0"/>
+                        <TextBlock Text="Operação (Perfil Fiscal)" FontSize="11" Foreground="#6B7280" FontWeight="Normal" Margin="0,8,0,0"/>
+                        <ComboBox ItemsSource="{Binding PerfisFiscais}"
+SelectedItem="{Binding PerfilFiscalSelecionado}"
+DisplayMemberPath="Nome"
+Margin="0,2,0,0"/>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                <TextBlock Text="Data Emissão" FontSize="11" Foreground="#6B7280" FontWeight="Normal"/>
+                                <DatePicker SelectedDate="{x:Static system:DateTime.Now}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                <TextBlock Text="Data Entrada" FontSize="11" Foreground="#6B7280" FontWeight="Normal"/>
+                                <DatePicker SelectedDate="{x:Static system:DateTime.Now}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="DADOS DO FORNECEDOR" FontWeight="Bold" FontSize="11" Margin="5" Padding="5" MinWidth="310">
+                    <StackPanel>
+                        <TextBlock Text="Fornecedor" FontSize="11" Foreground="#6B7280" FontWeight="Normal" Margin="0,5,0,0"/>
+                        <TextBlock Text="{Binding NotaFiscal.NomeEmitente, FallbackValue='ACME FORNECEDORA DE PRODUTOS LTDA'}" FontWeight="SemiBold" Foreground="#111827" FontSize="14"/>
+                        <TextBlock Text="CNPJ" FontSize="11" Foreground="#6B7280" FontWeight="Normal" Margin="0,8,0,0"/>
+                        <TextBlock Text="{Binding NotaFiscal.CnpjEmitente, FallbackValue='12.345.678/0001-99'}" FontWeight="SemiBold" Foreground="#111827" FontSize="14"/>
+                        <TextBlock Text="Nº Nota / Série" FontSize="11" Foreground="#6B7280" FontWeight="Normal" Margin="0,8,0,0"/>
+                        <TextBlock FontWeight="SemiBold" Foreground="#111827" FontSize="14">
+                            <Run Text="{Binding NotaFiscal.NumeroNota, FallbackValue='12345'}"/>
+                            <Run Text="/"/>
+                            <Run Text="{Binding NotaFiscal.Serie, FallbackValue='1'}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="TOTAIS DA NOTA" FontWeight="Bold" FontSize="11" Margin="5" Padding="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TotalBorderStyle}">
+                            <StackPanel>
+                                <TextBlock Text="BASE ICMS" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="0,00" Style="{StaticResource TotalValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource TotalBorderStyle}">
+                            <StackPanel>
+                                <TextBlock Text="VALOR ICMS" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="0,00" Style="{StaticResource TotalValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource TotalBorderStyle}">
+                            <StackPanel>
+                                <TextBlock Text="BASE ICMS ST" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="0,00" Style="{StaticResource TotalValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource TotalBorderStyle}">
+                            <StackPanel>
+                                <TextBlock Text="VALOR ICMS ST" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="0,00" Style="{StaticResource TotalValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource TotalBorderStyle}" BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock Text="VLR PRODUTOS" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="0,00" Style="{StaticResource TotalValueStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource TotalBorderStyle}" Margin="0,4,0,0" BorderThickness="1,0,0,1">
+                            <StackPanel>
+                                <TextBlock Text="FRETE" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBox Text="0,00" TextAlignment="Right" FontSize="14" FontWeight="SemiBold" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TotalBorderStyle}" Margin="0,4,0,0">
+                            <StackPanel>
+                                <TextBlock Text="SEGURO" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBox Text="0,00" TextAlignment="Right" FontSize="14" FontWeight="SemiBold" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource TotalBorderStyle}" Margin="0,4,0,0">
+                            <StackPanel>
+                                <TextBlock Text="DESCONTO" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBox Text="0,00" TextAlignment="Right" FontSize="14" FontWeight="SemiBold" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource TotalBorderStyle}" Margin="0,4,0,0">
+                            <StackPanel>
+                                <TextBlock Text="OUTRAS DESP." Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBox Text="0,00" TextAlignment="Right" FontSize="14" FontWeight="SemiBold" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource TotalBorderStyle}" Margin="0,4,0,0" BorderThickness="1" Background="#F3F4F6">
+                            <StackPanel>
+                                <TextBlock Text="VALOR TOTAL NF" Style="{StaticResource TotalLabelStyle}"/>
+                                <TextBlock Text="{Binding NotaFiscal.ValorTotal, StringFormat=C2, FallbackValue='R$ 1.987,50'}" Style="{StaticResource TotalValueStyle}" FontSize="16"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </GroupBox>
+            </WrapPanel>
+            <GroupBox Header="Conciliação de Produtos" Grid.Row="2" Margin="20,0,20,15" FontSize="14" FontWeight="Bold">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding ItensDaNota}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5,0,5,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" BorderBrush="SteelBlue" BorderThickness="1" CornerRadius="5" Padding="6" Background="#F0F8FF">
+                                        <StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding ItemOriginal.DescricaoProduto}" FontWeight="Bold" FontSize="13" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding ItemOriginal.CodigoFornecedor, StringFormat='Cód. Fornecedor: {0}'}" Foreground="Gray" FontSize="10" />
+                                            </StackPanel>
+                                            <Separator Margin="0,4" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Quantidade:" Margin="0,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ItemOriginal.Quantidade, StringFormat={}{0:N4}}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Unidade:" Margin="0,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ItemOriginal.Unidade}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="2" Text="Vlr. Unitário:" Margin="10,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding ItemOriginal.ValorUnitario, StringFormat={}{0:C4}}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="2" Text="Vlr. Total:" Margin="10,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding ItemOriginal.ValorTotal, StringFormat={}{0:C2}}" FontWeight="Bold" Foreground="SteelBlue" FontSize="11" />
+                                                
+                                            </Grid>
+                                            <Separator Margin="0,4" />
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="NCM: " FontSize="11" />
+                                                <TextBlock Text="{Binding ItemOriginal.Ncm}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Text="CST:"  Margin="20,0,5,2"  FontSize="11" />
+                                                <TextBlock FontWeight="SemiBold" FontSize="11"><Run Text="{Binding ItemOriginal.Origem}" /><Run Text="{Binding ItemOriginal.Cst}" /></TextBlock>
+                                                <TextBlock Text="CFOP:"  Margin="20,0,5,2"  FontSize="11" />
+                                                <TextBlock Text="{Binding ItemOriginal.Cfop}" FontWeight="SemiBold" FontSize="11" />
+                                            </StackPanel>
+
+
+                                        </StackPanel>
+                                    </Border>
+
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="➡" FontSize="24" FontWeight="Bold" Foreground="Gray" />
+
+                                    <Border Grid.Column="2" BorderBrush="SeaGreen" BorderThickness="1" CornerRadius="5" Padding="6" Background="#F0FFF0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0">
+                                                <TextBlock Text="{Binding ProdutoVinculado.Descricao_PROD, TargetNullValue='-- NENHUM PRODUTO VINCULADO --'}" FontWeight="Bold" FontSize="13" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding ProdutoVinculado.CodigoProduto, StringFormat='Cód. Sistema: {0}', TargetNullValue=''}" Foreground="Gray" FontSize="10" />
+                                            </StackPanel>
+                                            <Separator Grid.Row="1" Margin="0,4" />
+                                            <Grid Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Estoque:" Margin="0,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ProdutoVinculado.EstoqueAtual, StringFormat={}{0:N4}, TargetNullValue='--'}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Unidade:" Margin="0,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProdutoVinculado.Unidade, TargetNullValue='--'}" FontWeight="SemiBold" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="2" Text="Custo:" Margin="10,0,5,2" FontSize="11" />
+                                                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding ProdutoVinculado.PrecoFabrica, StringFormat={}{0:C4}, TargetNullValue='--'}" FontWeight="SemiBold" FontSize="11" />
+
+                                            </Grid>
+                                            <Separator Grid.Row="3" Margin="0,4" />
+                                            <Grid Grid.Row="4" VerticalAlignment="Bottom">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                                    <Button Content="Vincular" Style="{StaticResource LinkButtonStyle}" Command="{Binding DataContext.VincularProdutoCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" FontSize="11" ToolTip="Vincular a um produto existente no sistema"/>
+                                                    <TextBlock Text="|" Margin="4,0" VerticalAlignment="Center" Foreground="LightGray"/>
+                                                    <Button Content="Cadastrar" Command="{Binding DataContext.CadastrarProdutoCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" Style="{StaticResource LinkButtonStyle}" FontSize="11" ToolTip="Cadastrar este item como um novo produto"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                                    <TextBlock Text="NCM: " FontSize="11" />
+                                                    <TextBlock Text="{Binding ProdutoVinculado.NCM}" FontWeight="SemiBold" FontSize="11" />
+                                                    <TextBlock Text="CST:"  Margin="20,0,5,2"  FontSize="11" />
+                                                    <TextBlock FontWeight="SemiBold" FontSize="11"><Run Text="{Binding ProdutoVinculado.Origem}" /><Run Text="{Binding ProdutoVinculado.Cst}" /></TextBlock>
+
+
+
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </GroupBox>
+
+
+            <Border Grid.Row="3" Background="#F9FAFB" CornerRadius="0,0,8,8" BorderBrush="#D1D5DB" BorderThickness="0,1,0,0" Padding="20,15">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Cancelar" Command="{Binding CancelarCommand}" Margin="0,0,10,0" Padding="15,8"/>
+                    <Button Content="Salvar Entrada" Command="{Binding SalvarCommand}" FontWeight="Bold" Padding="15,8" Background="#2563EB" Foreground="White"/>
+                </StackPanel>
+            </Border>
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsBuscandoProduto}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Border Background="Black" Opacity="0.6"/>
+
+                <commonViews:BuscaProdutoView 
+                xmlns:commonViews="clr-namespace:FluxoSistema.ComponentesComuns.Views;assembly=FluxoSistema.ComponentesComuns"
+                DataContext="{Binding BuscaProdutoViewModel}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="800"
+                Height="600"
+                Margin="40"/>
+            </Grid>
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsCadastrandoProduto}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Border Background="Black" Opacity="0.6"/>
+
+                <commonViews:CadastroProdutoView 
+                xmlns:commonViews="clr-namespace:FluxoSistema.ComponentesComuns.Views;assembly=FluxoSistema.ComponentesComuns"
+                DataContext="{Binding CadastroProdutoViewModel}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="800"
+                Height="600"
+                Margin="40"    />
+            </Grid>
+            
+            
+            
+        </Grid>
+        
+        
+    </Border>
+</UserControl>
