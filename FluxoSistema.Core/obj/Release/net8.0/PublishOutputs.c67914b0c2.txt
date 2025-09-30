@@ -1,0 +1,4 @@
+C:\PROJETO\MOTOR_FISCAL_FLUXO\FluxoSistema.Core.dll
+C:\PROJETO\MOTOR_FISCAL_FLUXO\FluxoSistema.Core.deps.json
+C:\PROJETO\MOTOR_FISCAL_FLUXO\FluxoSistema.Core.pdb
+C:\PROJETO\MOTOR_FISCAL_FLUXO\CommunityToolkit.Mvvm.dll

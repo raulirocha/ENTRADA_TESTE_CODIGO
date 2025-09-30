@@ -1,0 +1,26 @@
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.deps.json
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.pdb
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.csproj.AssemblyReference.cache
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.AssemblyInfoInputs.cache
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.AssemblyInfo.cs
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.csproj.CoreCompileInputs.cache
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.sourcelink.json
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\refint\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.pdb
+C:\PROJETO\FluxoSistema\FluxoSistema.Core\obj\Release\net8.0\ref\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.deps.json
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\bin\Release\net8.0\FluxoSistema.Core.pdb
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.csproj.AssemblyReference.cache
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.AssemblyInfoInputs.cache
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.AssemblyInfo.cs
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.csproj.CoreCompileInputs.cache
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.sourcelink.json
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\refint\FluxoSistema.Core.dll
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\FluxoSistema.Core.pdb
+C:\PROJETO\FluxoSistema - 21 08 2025\FluxoSistema.Core\obj\Release\net8.0\ref\FluxoSistema.Core.dll
